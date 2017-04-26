@@ -31,8 +31,6 @@
 		window.addEventListener('load',cargarDatos,true);
 
 		function cargarDatos(){
-			document.getElementById('btn-save').style.opacity = "0";
-			document.getElementById('lbl-guardado').style.opacity = "0";
 			texto = localStorage.getItem('texto');
 			document.getElementById('texto').innerHTML = texto;
 		}
