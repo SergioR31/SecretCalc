@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width = device-width">
+	<meta name="viewport" content="height = device-height">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:light" rel="stylesheet">
+
+	<title></title>
+</head>
+<body>
+	<div class="pantalla">
+		<h1 id="resultado">0</h1>
+	</div>
+	<!-- .pantalla -->
+
+	<div class="funciones-numeros">
+		<div class="col-funciones-numeros">
+			<button class="btn-funcion" value="±" onclick="changeSign('-')">±</button>
+			<button class="btn-numero" value="7" onclick="addCaracter('7')">7</button>
+			<button class="btn-numero" value="4" onclick="addCaracter('4')">4</button>
+			<button class="btn-numero" value="1" onclick="addCaracter('1')">1</button>
+		</div>
+		<div class="col-funciones-numeros">
+			<button class="btn-funcion" value="(" onclick="addCaracter('(')">(</button>
+			<button class="btn-numero" value="8" onclick="addCaracter('8')">8</button>
+			<button class="btn-numero" value="5" onclick="addCaracter('5')">5</button>
+			<button class="btn-numero" value="2" onclick="addCaracter('2')">2</button>
+		</div>
+		<div class="col-funciones-numeros">
+			<button class="btn-funcion" value=")" onclick="addCaracter(')')">)</button>
+			<button class="btn-numero" value="9" onclick="addCaracter('9')">9</button>
+			<button class="btn-numero" value="6" onclick="addCaracter('6')">6</button>
+			<button class="btn-numero" value="3" onclick="addCaracter('3')">3</button>
+		</div>
+		<div class="col-funciones-numeros">
+			<button class="btn-funcion" onclick="entrar('notas.html')">☆</button>
+			<button class="btn-operaciones" value="/" onclick="addCaracter('/')">÷</button>
+			<button class="btn-operaciones" value="*" onclick="addCaracter('*')">×</button>
+			<button class="btn-operaciones" value="-" onclick="addCaracter('-')">-</button>
+		</div>
+	</div>
+	<!-- .funciones-numeros -->
+
+	<div class="resultado">
+		<div class="col-numeros">
+			<button class="btn-numeros" value="0" onclick="addCaracter('0')">0</button>
+		</div>
+		<div class="col-numeros">
+			<button class="btn-numeros" value="." onclick="addCaracter('.')">.</button>
+		</div>
+		<div class="col-numeros">
+			<button class="btn-numeros" value="%" onclick="addCaracter('%')">%</button>
+		</div>
+		<div class="col-suma">
+			<button class="btn-suma" value="+" onclick="addCaracter('+')">+</button>
+		</div>
+		<div class="col-c">
+			<button class="btn-c" onclick="borrar()">c</button>
+		</div>
+		<div class="col-igual">
+			<button class="btn-igual" onclick="evaluar()">=</button>
+		</div>
+		
+	</div>
+	<!-- .resultado -->
+
+	<script type="text/javascript">
+
+	var cadena = "";
+
+	function addCaracter(caracter){
+		if (cadena.charAt(cadena.length - 1) == "/" || cadena.charAt(cadena.length - 1) == "*" || cadena.charAt(cadena.length - 1) == "-" || cadena.charAt(cadena.length - 1) == "+") {
+			if (caracter == ".") {
+				cadena = cadena+"0"+caracter;
+			}else{
+				cadena = cadena+caracter;
+			}
+		}else{
+			cadena = cadena+caracter;
+		}
+		document.querySelector('.pantalla>h1').innerHTML = cadena;
+		console.log(cadena);
+	}
+
+	function changeSign(caracter){
+		if (cadena.substring(0, 1) == "-") {
+			cadena = cadena.substring(1);
+		}else{
+			cadena = caracter+cadena;
+		}
+		document.querySelector('.pantalla>h1').innerHTML = cadena;
+	}
+
+	function evaluar(){
+		console.log(cadena);
+		try{
+			var resultado = eval(cadena);
+			document.querySelector('.pantalla>h1').innerHTML = resultado;
+			cadena=resultado;
+		}catch (er){
+			cadena = "";
+			resultado = "";
+			document.querySelector('.pantalla>h1').innerHTML = "Error";	
+		}
+	}
+
+	function borrar(){
+		cadena = "";
+		document.querySelector('.pantalla>h1').innerHTML = "0";
+	}
+
+	function entrar(liga){
+		if (cadena == '007') {
+			window.location.assign(liga);
+		}
+	}
+	</script>
+</body>
+</html>

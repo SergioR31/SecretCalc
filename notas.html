@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width = device-width">
+	<meta name="viewport" content="height = device-height">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:light" rel="stylesheet">
+	<title></title>
+</head>
+<body>
+	<nav>
+		<div class="back">
+			<button onclick="goBack('index.html')"">Back</button>
+		</div>
+	</nav>
+	<!-- .nav -->
+	<div class="texto">
+		<textarea placeholder="Toca para escribir..." id="texto" onkeyup="showBtnSave()"></textarea>
+	</div>
+	<!-- .texto -->
+
+	<div class="save">
+		<label id="lbl-guardado">Guardado</label>
+		<button onclick="guardarNota()" id="btn-save"></button>
+	</div>
+	<!-- .save -->
+
+	<script type="text/javascript">
+
+		window.addEventListener('load',cargarDatos,true);
+
+		function cargarDatos(){
+			document.getElementById('btn-save').style.opacity = "0";
+			document.getElementById('lbl-guardado').style.opacity = "0";
+			texto = localStorage.getItem('texto');
+			document.getElementById('texto').innerHTML = texto;
+		}
+
+
+		function goBack(liga){
+			window.location.assign(liga);
+		}
+
+		function guardarNota(){
+			texto = document.getElementById('texto').value;
+			localStorage.setItem("texto",texto);
+
+			document.getElementById('btn-save').style.opacity = "0";
+			document.getElementById('btn-save').style.transition = ".5s";
+
+			setTimeout(function(){mostrarConfirmacion()},1000);
+		}
+
+		function mostrarConfirmacion(){
+			document.getElementById('lbl-guardado').style.opacity = "1";
+			document.getElementById('lbl-guardado').style.transition = ".5s";
+			setTimeout(function(){desaparecerConfirmacion()},1000);
+		}
+
+		function desaparecerConfirmacion(){
+			document.getElementById('lbl-guardado').style.opacity = "0";
+			document.getElementById('lbl-guardado').style.transition = ".5s";
+		}
+
+		function showBtnSave(){
+			document.getElementById('btn-save').style.opacity = "1";
+			document.getElementById('btn-save').style.transition = ".5s";
+		}
+	</script>
+</body>
+</html>
